@@ -1,5 +1,4 @@
 import { withRtl } from 'i18n-calypso';
-import { clone, filter, findIndex } from 'lodash';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDom from 'react-dom';
@@ -9,7 +8,6 @@ import SortedGrid from 'calypso/components/sorted-grid';
 import { getMimePrefix } from 'calypso/lib/media/utils';
 import { selectMediaItems } from 'calypso/state/media/actions';
 import getMediaLibrarySelectedItems from 'calypso/state/selectors/get-media-library-selected-items';
-import isFetchingNextPage from 'calypso/state/selectors/is-fetching-next-page';
 import ListItem from './list-item';
 import ListNoContent from './list-no-content';
 import ListNoResults from './list-no-results';
@@ -97,14 +95,16 @@ export class MediaLibraryList extends React.Component {
 		// seeking to select a single item
 		let selectedItems;
 		if ( this.props.single ) {
-			selectedItems = filter( this.props.selectedItems, { ID: item.ID } );
+			selectedItems = this.props.selectedItems.filter( ( { ID } ) => ID === item.ID );
 		} else {
-			selectedItems = clone( this.props.selectedItems );
+			selectedItems = [ ...this.props.selectedItems ];
 		}
 
-		const selectedItemsIndex = findIndex( selectedItems, { ID: item.ID } );
+		const selectedItemsIndex = selectedItems.findIndex( ( { ID } ) => ID === item.ID );
 		const isToBeSelected = -1 === selectedItemsIndex;
-		const selectedMediaIndex = findIndex( this.props.media, { ID: item.ID } );
+		const selectedMediaIndex = this.props.media.findIndex(
+			( mediaItem ) => mediaItem.ID === item.ID
+		);
 
 		let start = selectedMediaIndex;
 		let end = selectedMediaIndex;
@@ -115,9 +115,7 @@ export class MediaLibraryList extends React.Component {
 		}
 
 		for ( let i = start; i <= end; i++ ) {
-			const interimIndex = findIndex( selectedItems, {
-				ID: this.props.media[ i ].ID,
-			} );
+			const interimIndex = selectedItems.findIndex( ( { ID } ) => ID === this.props.media[ i ].ID );
 
 			if ( isToBeSelected && -1 === interimIndex ) {
 				selectedItems.push( this.props.media[ i ] );
@@ -152,9 +150,9 @@ export class MediaLibraryList extends React.Component {
 	};
 
 	renderItem = ( item ) => {
-		const index = findIndex( this.props.media, { ID: item.ID } );
-		const selectedItems = this.props.selectedItems;
-		const selectedIndex = findIndex( selectedItems, { ID: item.ID } );
+		const { selectedItems, media } = this.props;
+		const index = media.findIndex( ( { ID } ) => ID === item.ID );
+		const selectedIndex = selectedItems.findIndex( ( { ID } ) => ID === item.ID );
 		const ref = this.getItemRef( item );
 
 		const showGalleryHelp =
@@ -208,7 +206,12 @@ export class MediaLibraryList extends React.Component {
 			return <ListPlanUpgradeNudge filter={ this.props.filter } site={ this.props.site } />;
 		}
 
-		if ( ! this.props.mediaHasNextPage && this.props.media && 0 === this.props.media.length ) {
+		if (
+			! this.props.isLoading &&
+			! this.props.mediaHasNextPage &&
+			this.props.media &&
+			0 === this.props.media.length
+		) {
 			return React.createElement( this.props.search ? ListNoResults : ListNoContent, {
 				site: this.props.site,
 				filter: this.props.filter,
@@ -239,7 +242,7 @@ export class MediaLibraryList extends React.Component {
 				items={ this.props.media || [] }
 				itemsPerRow={ this.getItemsPerRow() }
 				lastPage={ ! this.props.mediaHasNextPage }
-				fetchingNextPage={ this.props.isFetchingNextPage }
+				fetchingNextPage={ this.props.isLoading || this.props.isFetchingNextPage }
 				guessedItemHeight={ this.getMediaItemHeight() }
 				fetchNextPage={ onFetchNextPage }
 				getItemRef={ this.getItemRef }
@@ -255,7 +258,6 @@ export class MediaLibraryList extends React.Component {
 export default connect(
 	( state, { site } ) => ( {
 		selectedItems: getMediaLibrarySelectedItems( state, site?.ID ),
-		isFetchingNextPage: isFetchingNextPage( state, site?.ID ),
 	} ),
 	{ selectMediaItems }
 )( withRtl( withLocalizedMoment( MediaLibraryList ) ) );
