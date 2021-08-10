@@ -39,7 +39,7 @@ import ComponentDemo from 'calypso/my-sites/marketplace/pages/marketplace-test/c
 import AdminMenuFetch from 'calypso/my-sites/marketplace/pages/marketplace-test/admin-menu-fetch';
 import { YOAST } from 'calypso/my-sites/marketplace/marketplace-product-definitions';
 import useWPCOMPlugins from 'calypso/data/marketplace/use-wpcom-plugins-query';
-import PluginItem from 'calypso/my-sites/plugins/plugin-item/plugin-item';
+import PluginsBrowserList from 'calypso/my-sites/plugins/plugins-browser-list';
 
 export const Container = styled.div`
 	margin: 0 25px;
@@ -124,18 +124,14 @@ export default function MarketplaceTest(): JSX.Element {
 			{ selectedSiteId && <QueryJetpackPlugins siteIds={ [ selectedSiteId ] } /> }
 			<SidebarNavigation />
 			<Card key="wpcom-plugins">
-				{ data.map( ( plugin ) => {
-					return (
-						<PluginItem
-							key={ plugin.slug }
-							plugin={ plugin }
-							sites={ [] }
-							pluginLink={ `/marketplace/product/details/${ encodeURIComponent(
-								plugin.slug
-							) }/${ selectedSiteSlug }` }
-						/>
-					);
-				} ) }
+				<PluginsBrowserList
+					plugins={ data }
+					listName={ 'paid' }
+					title={ 'Paid Plugins' }
+					site={ selectedSiteSlug }
+					showPlaceholders={ isFetching }
+					currentSites={ null }
+				/>
 			</Card>
 			<Card key="heading">
 				<CardHeading key="title" tagName="h1" size={ 24 }>
