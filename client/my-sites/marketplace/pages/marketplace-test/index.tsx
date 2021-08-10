@@ -38,6 +38,8 @@ import Notice from 'calypso/components/notice';
 import ComponentDemo from 'calypso/my-sites/marketplace/pages/marketplace-test/component-demo';
 import AdminMenuFetch from 'calypso/my-sites/marketplace/pages/marketplace-test/admin-menu-fetch';
 import { YOAST } from 'calypso/my-sites/marketplace/marketplace-product-definitions';
+import useWPCOMPlugins from 'calypso/data/marketplace/use-wpcom-plugins-query';
+import PluginItem from 'calypso/my-sites/plugins/plugin-item/plugin-item';
 
 export const Container = styled.div`
 	margin: 0 25px;
@@ -61,6 +63,8 @@ export default function MarketplaceTest(): JSX.Element {
 	const selectedSiteSlug = useSelector( getSelectedSiteSlug );
 	const isAtomicSite = useSelector( ( state ) => isSiteWpcomAtomic( state, selectedSiteId ?? 0 ) );
 	const pluginDetails = useSelector( ( state ) => getPlugins( state, [ selectedSiteId ] ) );
+	const { data = [], isFetching } = useWPCOMPlugins( 'all' );
+	console.log( data, isFetching );
 
 	const isRequestingForSite = useSelector( ( state ) =>
 		isRequestingForSites( state, [ selectedSiteId ] )
@@ -119,6 +123,20 @@ export default function MarketplaceTest(): JSX.Element {
 		<Container>
 			{ selectedSiteId && <QueryJetpackPlugins siteIds={ [ selectedSiteId ] } /> }
 			<SidebarNavigation />
+			<Card key="wpcom-plugins">
+				{ data.map( ( plugin ) => {
+					return (
+						<PluginItem
+							key={ plugin.slug }
+							plugin={ plugin }
+							sites={ [] }
+							pluginLink={ `/marketplace/product/details/${ encodeURIComponent(
+								plugin.slug
+							) }/${ selectedSiteSlug }` }
+						/>
+					);
+				} ) }
+			</Card>
 			<Card key="heading">
 				<CardHeading key="title" tagName="h1" size={ 24 }>
 					Marketplace Test Page
