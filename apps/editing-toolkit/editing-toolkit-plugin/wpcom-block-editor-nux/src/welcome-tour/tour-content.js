@@ -3,14 +3,27 @@ import { ExternalLink } from '@wordpress/components';
 import { createInterpolateElement } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-const addBlock = 'https://s0.wp.com/i/editor-welcome-tour/slide-add-block.gif';
-const allBlocks = 'https://s0.wp.com/i/editor-welcome-tour/slide-all-blocks.gif';
-const finish = 'https://s0.wp.com/i/editor-welcome-tour/slide-finish.png';
-const makeBold = 'https://s0.wp.com/i/editor-welcome-tour/slide-make-bold.gif';
-const moreOptions = 'https://s0.wp.com/i/editor-welcome-tour/slide-more-options.gif';
-const moveBlock = 'https://s0.wp.com/i/editor-welcome-tour/slide-move-block.gif';
-const undo = 'https://s0.wp.com/i/editor-welcome-tour/slide-undo.gif';
-const welcome = 'https://s0.wp.com/i/editor-welcome-tour/slide-welcome.png';
+const CDN_PREFIX = 'https://s0.wp.com/i/editor-welcome-tour';
+const addBlock = {
+	desktop: `${ CDN_PREFIX }/slide-add-block.gif`,
+	mobile: `${ CDN_PREFIX }/slide-add-block_mobile.gif`,
+};
+const allBlocks = { desktop: `${ CDN_PREFIX }/slide-all-blocks.gif` };
+const finish = { desktop: `${ CDN_PREFIX }/slide-finish.png` };
+const makeBold = { desktop: `${ CDN_PREFIX }/slide-make-bold.gif` };
+const moreOptions = {
+	desktop: `${ CDN_PREFIX }/slide-more-options.gif`,
+	mobile: `${ CDN_PREFIX }/slide-more-options_mobile.gif`,
+};
+const moveBlock = {
+	desktop: `${ CDN_PREFIX }/slide-move-block.gif`,
+	mobile: `${ CDN_PREFIX }/slide-move-block_mobile.gif`,
+};
+const undo = { desktop: `${ CDN_PREFIX }/slide-undo.gif` };
+const welcome = {
+	desktop: `${ CDN_PREFIX }/slide-welcome.png`,
+	mobile: `${ CDN_PREFIX }/slide-welcome_mobile.jpg`,
+};
 
 /**
  * This function returns a collection of NUX Tour slide data
