@@ -3,6 +3,7 @@
  */
 import { recordTracksEvent } from '@automattic/calypso-analytics';
 import { useLocale } from '@automattic/i18n-utils';
+import { isDesktop } from '@automattic/viewport';
 import { Button, Flex } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { createPortal, useEffect, useState, useRef } from '@wordpress/element';
@@ -32,7 +33,9 @@ function LaunchWpcomWelcomeTour() {
 	const localeSlug = useLocale();
 
 	// Preload first card image (others preloaded after open state confirmed)
-	new window.Image().src = getTourContent( localeSlug )[ 0 ].imgSrc;
+	new window.Image().src = isDesktop()
+		? getTourContent( localeSlug )[ 0 ].imgSrc.desktop
+		: getTourContent( localeSlug )[ 0 ].imgSrc.mobile;
 
 	useEffect( () => {
 		if ( ! show && ! isNewPageLayoutModalOpen ) {
@@ -110,7 +113,9 @@ function WelcomeTourFrame() {
 	};
 
 	// Preload card images
-	cardContent.forEach( ( card ) => ( new window.Image().src = card.imgSrc ) );
+	cardContent.forEach(
+		( card ) => ( new window.Image().src = isDesktop() ? card.imgSrc.desktop : card.imgSrc.mobile )
+	);
 
 	return (
 		<>
