@@ -64,7 +64,7 @@ function WelcomeTourCard( {
 						<source
 							srcSet={ imgSrc.mobile.src }
 							type={ imgSrc.mobile.type }
-							media={ getMediaQueryList( '<480px' ).media }
+							media={ getMediaQueryList( '<480px' )?.media }
 						/>
 					) }
 					<img
