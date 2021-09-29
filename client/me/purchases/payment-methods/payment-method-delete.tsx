@@ -13,7 +13,6 @@ import { ReduxDispatch } from 'calypso/state/redux-store';
 import { deleteStoredCard } from 'calypso/state/stored-cards/actions';
 import { isDeletingStoredCard } from 'calypso/state/stored-cards/selectors';
 import PaymentMethodDeleteDialog from './payment-method-delete-dialog';
-import PaymentMethodDetails from './payment-method-details';
 
 interface Props {
 	card: PaymentMethod;
@@ -67,15 +66,6 @@ const PaymentMethodDelete: FunctionComponent< Props > = ( { card } ) => {
 				isVisible={ isDialogVisible }
 				onClose={ closeDialog }
 				onConfirm={ handleDelete }
-			/>
-			<PaymentMethodDetails
-				lastDigits={ card.card }
-				email={ card.email }
-				cardType={ card.card_type || '' }
-				paymentPartner={ card.payment_partner }
-				name={ card.name }
-				expiry={ card.expiry }
-				isExpired={ card.is_expired }
 			/>
 			{ renderDeleteButton() }
 		</>
