@@ -1162,6 +1162,7 @@ __metadata:
     "@automattic/page-pattern-modal": ^1.0.0-alpha.0
     "@automattic/plans-grid": ^1.0.0-alpha.0
     "@automattic/typography": ^1.0.0
+    "@automattic/viewport": ^1.0.0
     "@babel/core": ^7.15.0
     "@babel/preset-typescript": ^7.15.0
     "@emotion/react": ^11.4.1
