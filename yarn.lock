@@ -508,7 +508,7 @@ __metadata:
     react-redux: ^7.2.4
     redux: ^4.1.1
     redux-thunk: ^2.3.0
-    webpack: ^5.53.0
+    webpack: ^5.54.0
     webpack-bundle-analyzer: ^4.4.2
     webpack-dev-server: ^3.11.2
     wpcom: ^6.0.0
@@ -565,7 +565,7 @@ __metadata:
     react-redux: ^7.2.4
     redux: ^4.1.1
     redux-thunk: ^2.3.0
-    webpack: ^5.53.0
+    webpack: ^5.54.0
     webpack-bundle-analyzer: ^4.4.2
     webpack-dev-server: ^3.11.2
     wpcom: ^6.0.0
