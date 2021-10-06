@@ -3,11 +3,13 @@ import DesignPicker, { isBlankCanvasDesign, getDesignUrl } from '@automattic/des
 import { shuffle } from '@automattic/js-utils';
 import { compose } from '@wordpress/compose';
 import { withViewportMatch } from '@wordpress/viewport';
+import classnames from 'classnames';
 import { localize, getLocaleSlug } from 'i18n-calypso';
 import page from 'page';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import FormattedHeader from 'calypso/components/formatted-header';
 import WebPreview from 'calypso/components/web-preview';
 import { recordTracksEvent } from 'calypso/lib/analytics/tracks';
 import StepWrapper from 'calypso/signup/step-wrapper';
@@ -153,8 +155,19 @@ class DesignPickerStep extends Component {
 				locale={ this.props.locale } // props.locale obtained via `localize` HoC
 				onSelect={ this.pickDesign }
 				onPreview={ this.previewDesign }
+				className={ classnames( {
+					'design-picker-step__has-categories': isEnabled( 'signup/design-picker-categories' ),
+				} ) }
 				highResThumbnails
 				showCategoryFilter={ isEnabled( 'signup/design-picker-categories' ) }
+				categoriesHeading={
+					<FormattedHeader
+						id={ 'step-header' }
+						headerText={ this.headerText() }
+						subHeaderText={ this.subHeaderText() }
+						align="left"
+					/>
+				}
 			/>
 		);
 	}
@@ -200,8 +213,6 @@ class DesignPickerStep extends Component {
 	render() {
 		const { flowName, stepName, userLoggedIn, isReskinned, isMobile, translate } = this.props;
 		const { selectedDesign } = this.state;
-		const headerText = this.headerText();
-		const subHeaderText = this.subHeaderText();
 
 		if ( selectedDesign ) {
 			const isBlankCanvas = isBlankCanvasDesign( selectedDesign );
@@ -234,10 +245,10 @@ class DesignPickerStep extends Component {
 		return (
 			<StepWrapper
 				{ ...this.props }
-				fallbackHeaderText={ headerText }
-				headerText={ headerText }
-				fallbackSubHeaderText={ subHeaderText }
-				subHeaderText={ subHeaderText }
+				className={ classnames( {
+					'design-picker__has-categories': isEnabled( 'signup/design-picker-categories' ),
+				} ) }
+				hideFormattedHeader
 				stepContent={ this.renderDesignPicker() }
 				align={ isReskinned ? 'left' : 'center' }
 				skipButtonAlign={ isReskinned ? 'top' : 'bottom' }
