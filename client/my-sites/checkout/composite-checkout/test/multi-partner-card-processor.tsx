@@ -103,8 +103,8 @@ describe( 'multiPartnerCardProcessor', () => {
 
 	const mockCardNumberElement = () => <div>mock card number</div>;
 
-	const countryCode = { isTouched: true, value: 'US', errors: [], isRequired: true };
-	const postalCode = { isTouched: true, value: '10001', errors: [], isRequired: true };
+	const countryCode = { isTouched: true, value: 'US', errors: [] };
+	const postalCode = { isTouched: true, value: '10001', errors: [] };
 
 	const basicExpectedStripeRequest = {
 		cart: {

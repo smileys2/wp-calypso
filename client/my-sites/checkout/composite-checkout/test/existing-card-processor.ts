@@ -41,8 +41,8 @@ describe( 'existingCardProcessor', () => {
 		contactDetails: undefined,
 	};
 
-	const countryCode = { isTouched: true, value: 'US', errors: [], isRequired: true };
-	const postalCode = { isTouched: true, value: '10001', errors: [], isRequired: true };
+	const countryCode = { isTouched: true, value: 'US', errors: [] };
+	const postalCode = { isTouched: true, value: '10001', errors: [] };
 
 	const basicExpectedStripeRequest = {
 		cart: {
