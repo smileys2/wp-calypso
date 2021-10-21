@@ -106,7 +106,7 @@ __metadata:
     enzyme-to-json: ^3.4.3
     jest-config: ^27.2.4
     jest-enzyme: ^7.1.2
-    mini-css-extract-plugin: ^1.6.0
+    mini-css-extract-plugin: ^2.4.3
     postcss-custom-properties: ^11.0.0
     postcss-loader: ^5.3.0
     recursive-copy: ^2.0.10
@@ -1113,7 +1113,7 @@ __metadata:
     "@romainberger/css-diff": ^1.0.3
     async: ^2.0.0
     css-loader: ^5.2.4
-    mini-css-extract-plugin: ^1.6.0
+    mini-css-extract-plugin: ^2.4.3
     rtlcss: ^3.1.2
     webpack: ^5.54.0
   peerDependencies:
@@ -24971,27 +24971,14 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"mini-css-extract-plugin@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "mini-css-extract-plugin@npm:1.6.0"
-  dependencies:
-    loader-utils: ^2.0.0
-    schema-utils: ^3.0.0
-    webpack-sources: ^1.1.0
-  peerDependencies:
-    webpack: ^4.4.0 || ^5.0.0
-  checksum: 8e71f7e7abf6760a7b3216e8f76aa8b4ee205ee32ecf2ca27d465a59858ff6f4faf76b8031875139a3889360a05a2f69b438fea6abc08c59da27026cd795ca45
-  languageName: node
-  linkType: hard
-
-"mini-css-extract-plugin@npm:^2.1.0":
-  version: 2.3.0
-  resolution: "mini-css-extract-plugin@npm:2.3.0"
+"mini-css-extract-plugin@npm:^2.1.0, mini-css-extract-plugin@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "mini-css-extract-plugin@npm:2.4.3"
   dependencies:
     schema-utils: ^3.1.0
   peerDependencies:
     webpack: ^5.0.0
-  checksum: d85b0cce58b824740bdd3470d8da100196802f5816c7a60939bd19b418cc06a4b8db8aef2f0ecb9b70051b251eb1a89dc036211a764059d9dcd181b1c2529f73
+  checksum: 0e325ffe121c523352c1f6d34689cc23c17b18354ab82e65375c93b00ba74c8c8a3a21b68ff3d18ee70b4a95c40add912faf691936d2c14b4b0f81b35d0f0cfa
   languageName: node
   linkType: hard
 
@@ -36795,7 +36782,7 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"webpack-sources@npm:^1.1.0, webpack-sources@npm:^1.4.0, webpack-sources@npm:^1.4.1, webpack-sources@npm:^1.4.3":
+"webpack-sources@npm:^1.4.0, webpack-sources@npm:^1.4.1, webpack-sources@npm:^1.4.3":
   version: 1.4.3
   resolution: "webpack-sources@npm:1.4.3"
   dependencies:
@@ -37310,7 +37297,7 @@ typescript@^4.4.3:
     loader-utils: ^1.2.3
     lodash: ^4.17.21
     lunr: ^2.3.8
-    mini-css-extract-plugin: ^1.6.0
+    mini-css-extract-plugin: ^2.4.3
     mixedindentlint: ^1.2.0
     mkdirp: ^1.0.4
     ncp: ^2.0.0
