@@ -1,3 +1,4 @@
+import config from '@automattic/calypso-config';
 import {
 	PLAN_JETPACK_SECURITY_DAILY,
 	PLAN_JETPACK_SECURITY_DAILY_MONTHLY,
@@ -183,7 +184,13 @@ const ProductGrid: React.FC< ProductsGridProps > = ( {
 					onSelectProduct={ onSelectProduct }
 				/>
 			) }
-			<ProductGridSection title={ translate( 'Most Popular' ) }>
+			<ProductGridSection
+				title={
+					! config.isEnabled( 'jetpack/simplify-pricing-structure' )
+						? translate( 'Most Popular' )
+						: undefined
+				}
+			>
 				{ ! planRecommendation && filterBar }
 				<ul
 					className={ classNames( 'product-grid__plan-grid', {
