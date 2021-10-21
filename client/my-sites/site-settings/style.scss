@@ -214,6 +214,22 @@
 		}
 	}
 
+	.site-settings__fiverr_logo_icon {
+		width: 5%;
+		padding: 10px;
+	}
+
+	.site-settings__fiverr-logo-maker-cta-text-title{
+		margin-left: 10x;
+		font-weight: 600;
+		line-height: 1rem;
+	}
+
+	.site-settings__fiverr-logo-maker-cta-text-subhead{
+		margin-left: 10px;
+		line-height: 1rem;
+	}
+
 	.card {
 		&.is-placeholder div {
 			@include placeholder();

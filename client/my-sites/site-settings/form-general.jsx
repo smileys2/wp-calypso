@@ -34,6 +34,7 @@ import isVipSite from 'calypso/state/selectors/is-vip-site';
 import { getDomainsBySiteId } from 'calypso/state/sites/domains/selectors';
 import { launchSite } from 'calypso/state/sites/launch/actions';
 import { getSiteOption, isJetpackSite, isCurrentPlanPaid } from 'calypso/state/sites/selectors';
+import fiverrIcon from 'calypso/assets/images/customer-home/fiverr-logo-grey.svg';
 import {
 	getSelectedSite,
 	getSelectedSiteId,
@@ -122,6 +123,35 @@ export class SiteSettingsFormGeneral extends Component {
 							{ translate( 'In a few words, explain what this site is about.' ) }
 						</FormSettingExplanation>
 					</FormFieldset>
+					<div className="site-settings__fiverr-logo-maker-cta">
+						<CompactCard>
+							<div className="site-settings__fiverr_logo_icon">
+								<img
+									className="fiverr_logo_cta"
+									src="/calypso/evergreen/images/fiverr-logo-grey-d4016e306dfffdd1a262.svg"
+								/>
+							</div>
+							<div className="site-settings__fiverr-logo-maker-cta-text">
+								<p className="site-settings__fiverr-logo-maker-cta-text-title">
+									{ translate( 'Make an incredible logo in just minutes' ) }
+								</p>
+								<p className="site-settings__fiverr-logo-maker-cta-text-subhead">
+									{ translate( 'Pre-designed by top talent. Just add your touch' ) }
+								</p>
+							</div>
+							<div className="fiver_cta_button">
+								<Button
+									href={
+										'https://www.fiverr.com/logo-maker/wordpress?utm_source=168693&utm_medium=cx_affiliate&utm_campaign=general_settings&afp=&cxd_token=168693_13741055'
+									}
+									onClick={ this.trackFiverrLogoMakerClick }
+								>
+									<Gridicon icon="external" />
+									{ translate( ' Try Fiverr Logo Maker' ) }
+								</Button>
+							</div>
+						</CompactCard>
+					</div>
 				</div>
 				<SiteIconSetting />
 			</div>
@@ -214,6 +244,12 @@ export class SiteSettingsFormGeneral extends Component {
 	trackUpgradeClick = () => {
 		this.props.recordTracksEvent( 'calypso_upgrade_nudge_cta_click', {
 			cta_name: 'settings_site_address',
+		} );
+	};
+
+	trackFiverrLogoMakerClick = () => {
+		this.props.recordTracksEvent( 'calypso_fiverr_logo_maker_cta_click', {
+			cta_name: 'site_icon_fiverr_logo_maker',
 		} );
 	};
 
