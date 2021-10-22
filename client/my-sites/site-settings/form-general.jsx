@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { flowRight, get, has } from 'lodash';
 import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+// import fiverrIcon from 'calypso/assets/images/customer-home/fiverr-logo-grey.svg';
 import UpsellNudge from 'calypso/blocks/upsell-nudge';
 import QuerySiteDomains from 'calypso/components/data/query-site-domains';
 import QuerySiteSettings from 'calypso/components/data/query-site-settings';
@@ -34,7 +35,6 @@ import isVipSite from 'calypso/state/selectors/is-vip-site';
 import { getDomainsBySiteId } from 'calypso/state/sites/domains/selectors';
 import { launchSite } from 'calypso/state/sites/launch/actions';
 import { getSiteOption, isJetpackSite, isCurrentPlanPaid } from 'calypso/state/sites/selectors';
-import fiverrIcon from 'calypso/assets/images/customer-home/fiverr-logo-grey.svg';
 import {
 	getSelectedSite,
 	getSelectedSiteId,
@@ -92,69 +92,72 @@ export class SiteSettingsFormGeneral extends Component {
 		} = this.props;
 
 		return (
-			<div className="site-settings__site-options">
-				<div className="site-settings__site-title-tagline">
-					<FormFieldset>
-						<FormLabel htmlFor="blogname">{ translate( 'Site title' ) }</FormLabel>
-						<FormInput
-							name="blogname"
-							id="blogname"
-							data-tip-target="site-title-input"
-							value={ fields.blogname || '' }
-							onChange={ onChangeField( 'blogname' ) }
-							disabled={ isRequestingSettings }
-							onClick={ eventTracker( 'Clicked Site Title Field' ) }
-							onKeyPress={ uniqueEventTracker( 'Typed in Site Title Field' ) }
-						/>
-					</FormFieldset>
-					<FormFieldset>
-						<FormLabel htmlFor="blogdescription">{ translate( 'Site tagline' ) }</FormLabel>
-						<FormInput
-							name="blogdescription"
-							id="blogdescription"
-							data-tip-target="site-tagline-input"
-							value={ fields.blogdescription || '' }
-							onChange={ onChangeField( 'blogdescription' ) }
-							disabled={ isRequestingSettings }
-							onClick={ eventTracker( 'Clicked Site Tagline Field' ) }
-							onKeyPress={ uniqueEventTracker( 'Typed in Site Tagline Field' ) }
-						/>
-						<FormSettingExplanation>
-							{ translate( 'In a few words, explain what this site is about.' ) }
-						</FormSettingExplanation>
-					</FormFieldset>
+			<>
+				<div className="site-settings__site-options">
+					<div className="site-settings__site-title-tagline">
+						<FormFieldset>
+							<FormLabel htmlFor="blogname">{ translate( 'Site title' ) }</FormLabel>
+							<FormInput
+								name="blogname"
+								id="blogname"
+								data-tip-target="site-title-input"
+								value={ fields.blogname || '' }
+								onChange={ onChangeField( 'blogname' ) }
+								disabled={ isRequestingSettings }
+								onClick={ eventTracker( 'Clicked Site Title Field' ) }
+								onKeyPress={ uniqueEventTracker( 'Typed in Site Title Field' ) }
+							/>
+						</FormFieldset>
+						<FormFieldset>
+							<FormLabel htmlFor="blogdescription">{ translate( 'Site tagline' ) }</FormLabel>
+							<FormInput
+								name="blogdescription"
+								id="blogdescription"
+								data-tip-target="site-tagline-input"
+								value={ fields.blogdescription || '' }
+								onChange={ onChangeField( 'blogdescription' ) }
+								disabled={ isRequestingSettings }
+								onClick={ eventTracker( 'Clicked Site Tagline Field' ) }
+								onKeyPress={ uniqueEventTracker( 'Typed in Site Tagline Field' ) }
+							/>
+							<FormSettingExplanation>
+								{ translate( 'In a few words, explain what this site is about.' ) }
+							</FormSettingExplanation>
+						</FormFieldset>
+					</div>
+					<SiteIconSetting />
+				</div>
+				<div className="site-settings__fiverr-cta">
 					<div className="site-settings__fiverr-logo-maker-cta">
-						<CompactCard>
-							<div className="site-settings__fiverr_logo_icon">
-								<img
-									className="fiverr_logo_cta"
-									src="/calypso/evergreen/images/fiverr-logo-grey-d4016e306dfffdd1a262.svg"
-								/>
-							</div>
-							<div className="site-settings__fiverr-logo-maker-cta-text">
-								<p className="site-settings__fiverr-logo-maker-cta-text-title">
-									{ translate( 'Make an incredible logo in just minutes' ) }
-								</p>
-								<p className="site-settings__fiverr-logo-maker-cta-text-subhead">
-									{ translate( 'Pre-designed by top talent. Just add your touch' ) }
-								</p>
-							</div>
-							<div className="fiver_cta_button">
-								<Button
-									href={
-										'https://www.fiverr.com/logo-maker/wordpress?utm_source=168693&utm_medium=cx_affiliate&utm_campaign=general_settings&afp=&cxd_token=168693_13741055'
-									}
-									onClick={ this.trackFiverrLogoMakerClick }
-								>
-									<Gridicon icon="external" />
-									{ translate( ' Try Fiverr Logo Maker' ) }
-								</Button>
-							</div>
-						</CompactCard>
+						<div className="site-settings__fiverr-logo-icon">
+							<img
+								className="site-settings__fiverr-logo-cta"
+								src="/calypso/evergreen/images/fiverr-logo-grey-d4016e306dfffdd1a262.svg"
+								alt="fiverr small logo"
+							/>
+						</div>
+						<div className="site-settings__fiverr-logo-maker-cta-text">
+							<p className="site-settings__fiverr-logo-maker-cta-text-title">
+								{ translate( 'Make an incredible logo in just minutes' ) }
+							</p>
+							<p className="site-settings__fiverr-logo-maker-cta-text-subhead">
+								{ translate( 'Pre-designed by top talent. Just add your touch' ) }
+							</p>
+						</div>
+						<div className="site-settings__fiver-cta-button">
+							<Button
+								href={
+									'https://www.fiverr.com/logo-maker/wordpress?utm_source=168693&utm_medium=cx_affiliate&utm_campaign=general_settings&afp=&cxd_token=168693_13741055'
+								}
+								onClick={ this.trackFiverrLogoMakerClick }
+							>
+								<Gridicon icon="external" />
+								{ translate( ' Try Fiverr Logo Maker' ) }
+							</Button>
+						</div>
 					</div>
 				</div>
-				<SiteIconSetting />
-			</div>
+			</>
 		);
 	}
 

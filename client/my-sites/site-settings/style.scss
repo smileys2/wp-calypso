@@ -214,22 +214,6 @@
 		}
 	}
 
-	.site-settings__fiverr_logo_icon {
-		width: 5%;
-		padding: 10px;
-	}
-
-	.site-settings__fiverr-logo-maker-cta-text-title{
-		margin-left: 10x;
-		font-weight: 600;
-		line-height: 1rem;
-	}
-
-	.site-settings__fiverr-logo-maker-cta-text-subhead{
-		margin-left: 10px;
-		line-height: 1rem;
-	}
-
 	.card {
 		&.is-placeholder div {
 			@include placeholder();
@@ -301,6 +285,31 @@
 		}
 	}
 }
+
+.site-settings__fiverr-logo-icon {
+	width: 5%;
+	padding: 10px;
+}
+
+.site-settings__fiverr-logo-maker-cta-text-title {
+	margin-left: 10px;
+	font-weight: 600;
+	line-height: 1rem;
+}
+
+.site-settings__fiverr-logo-maker-cta-text-subhead {
+	margin-left: 10px;
+	line-height: 1rem;
+}
+
+.site-settings__fiver-cta-button {
+	width: 175px;
+	text-align: center;
+	margin-left: 24px;
+	margin-left: auto;
+	justify-self: flex-end;
+} 
+
 
 .site-settings__site-title-tagline {
 	@include breakpoint-deprecated( '>660px' ) {
@@ -587,3 +596,4 @@ button.site-settings__general-settings-set-guessed-timezone.button.is-borderless
 	margin-top: -16px;
 	margin-bottom: 16px;
 }
+
