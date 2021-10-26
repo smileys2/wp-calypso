@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { flowRight, get, has } from 'lodash';
 import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-// import fiverrIcon from 'calypso/assets/images/customer-home/fiverr-logo-grey.svg';
+import fiverrLogo from 'calypso/assets/images/customer-home/fiverr-logo.svg';
 import UpsellNudge from 'calypso/blocks/upsell-nudge';
 import QuerySiteDomains from 'calypso/components/data/query-site-domains';
 import QuerySiteSettings from 'calypso/components/data/query-site-settings';
@@ -127,34 +127,30 @@ export class SiteSettingsFormGeneral extends Component {
 					</div>
 					<SiteIconSetting />
 				</div>
-				<div className="site-settings__fiverr-cta">
-					<div className="site-settings__fiverr-logo-maker-cta">
-						<div className="site-settings__fiverr-logo-icon">
-							<img
-								className="site-settings__fiverr-logo-cta"
-								src="/calypso/evergreen/images/fiverr-logo-grey-d4016e306dfffdd1a262.svg"
-								alt="fiverr small logo"
-							/>
+				<div className="site-settings__fiverr-logo-maker-cta">
+					<div className="site-settings__fiverr-logo-icon">
+						<img
+							className="site-settings__fiverr-logo-cta"
+							src={ fiverrLogo }
+							alt="fiverr small logo"
+						/>
+					</div>
+					<div className="site-settings__fiverr-logo-maker-cta-text">
+						<div className="site-settings__fiverr-logo-maker-cta-text-title">
+							{ translate( 'Make an incredible logo in minutes' ) }
 						</div>
-						<div className="site-settings__fiverr-logo-maker-cta-text">
-							<p className="site-settings__fiverr-logo-maker-cta-text-title">
-								{ translate( 'Make an incredible logo in just minutes' ) }
-							</p>
-							<p className="site-settings__fiverr-logo-maker-cta-text-subhead">
-								{ translate( 'Pre-designed by top talent. Just add your touch' ) }
-							</p>
+						<div className="site-settings__fiverr-logo-maker-cta-text-subhead">
+							{ translate( 'Pre-designed by top talent. Just add your touch.' ) }
 						</div>
-						<div className="site-settings__fiver-cta-button">
-							<Button
-								href={
-									'https://www.fiverr.com/logo-maker/wordpress?utm_source=168693&utm_medium=cx_affiliate&utm_campaign=general_settings&afp=&cxd_token=168693_13741055'
-								}
-								onClick={ this.trackFiverrLogoMakerClick }
-							>
-								<Gridicon icon="external" />
-								{ translate( ' Try Fiverr Logo Maker' ) }
-							</Button>
-						</div>
+					</div>
+					<div className="site-settings__fiver-cta-button">
+						<Button
+							href={ 'https://wp.me/logo-maker/?utm_campaign=general_settings' }
+							onClick={ this.trackFiverrLogoMakerClick }
+						>
+							<Gridicon icon="external" />
+							{ translate( ' Try Fiverr Logo Maker' ) }
+						</Button>
 					</div>
 				</div>
 			</>
@@ -251,7 +247,7 @@ export class SiteSettingsFormGeneral extends Component {
 	};
 
 	trackFiverrLogoMakerClick = () => {
-		this.props.recordTracksEvent( 'calypso_fiverr_logo_maker_cta_click', {
+		this.props.recordTracksEvent( 'calypso_site_icon_fiverr_logo_maker_cta_click', {
 			cta_name: 'site_icon_fiverr_logo_maker',
 		} );
 	};
