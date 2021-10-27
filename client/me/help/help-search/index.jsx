@@ -1,41 +1,31 @@
 import { CompactCard } from '@automattic/components';
-import { localize } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import { isEmpty } from 'lodash';
-import { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import QueryHelpLinks from 'calypso/components/data/query-help-links';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SearchCard from 'calypso/components/search-card';
+import { useHelpSearchQuery } from 'calypso/data/help/use-help-search-query';
 import { localizeUrl } from 'calypso/lib/i18n-utils';
 import HelpResults from 'calypso/me/help/help-results';
 import NoResults from 'calypso/my-sites/no-results';
 import { recordTracksEvent } from 'calypso/state/analytics/actions';
-import getHelpLinks from 'calypso/state/selectors/get-help-links';
 
 import './style.scss';
 
-export class HelpSearch extends PureComponent {
-	state = {
-		searchQuery: '',
+export default function HelpSearch( props ) {
+	const translate = useTranslate();
+	const dispatch = useDispatch();
+	const [ searchQuery, setSearchQuery ] = useState( '' );
+
+	const { data: helpLinks } = useHelpSearchQuery( searchQuery );
+
+	const onSearch = ( query ) => {
+		setSearchQuery( query );
+		props.onSearch( ! isEmpty( query ) );
+		dispatch( recordTracksEvent( 'calypso_help_search', { query } ) );
 	};
 
-	onSearch = ( searchQuery ) => {
-		this.setState( {
-			searchQuery,
-		} );
-
-		if ( isEmpty( searchQuery ) ) {
-			this.props.onSearch( false );
-		} else {
-			this.props.onSearch( true );
-		}
-
-		this.props.recordTracksEvent( 'calypso_help_search', { query: searchQuery } );
-	};
-
-	displaySearchResults = () => {
-		const { searchQuery } = this.state;
-		const { helpLinks, translate } = this.props;
-
+	function renderSearchResults() {
 		if ( isEmpty( searchQuery ) ) {
 			return null;
 		}
@@ -109,32 +99,18 @@ export class HelpSearch extends PureComponent {
 				/>
 			</div>
 		);
-	};
-
-	render() {
-		const { searchQuery } = this.state;
-
-		return (
-			<div className="help-search">
-				<QueryHelpLinks query={ searchQuery } />
-				<SearchCard
-					analyticsGroup="Help"
-					delaySearch={ true }
-					initialValue=""
-					onSearch={ this.onSearch }
-					placeholder={ this.props.translate( 'How can we help?' ) }
-				/>
-				{ this.displaySearchResults() }
-			</div>
-		);
 	}
+
+	return (
+		<div className="help-search">
+			<SearchCard
+				analyticsGroup="Help"
+				delaySearch
+				initialValue=""
+				onSearch={ onSearch }
+				placeholder={ translate( 'How can we help?' ) }
+			/>
+			{ renderSearchResults() }
+		</div>
+	);
 }
-
-export default connect(
-	( state ) => ( {
-		helpLinks: getHelpLinks( state ),
-	} ),
-	{
-		recordTracksEvent,
-	}
-)( localize( HelpSearch ) );
