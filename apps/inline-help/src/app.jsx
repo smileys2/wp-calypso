@@ -3,7 +3,6 @@
  */
 import '@automattic/calypso-polyfills';
 
-import React from 'react';
 import ReactDom from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
@@ -18,11 +17,6 @@ import analyticsMiddleware from 'calypso/state/analytics/middleware';
 import consoleDispatcher from 'calypso/state/console-dispatch';
 import { setCurrentUser } from 'calypso/state/current-user/actions';
 import currentUser from 'calypso/state/current-user/reducer';
-import {
-	reducer as httpData,
-	enhancer as httpDataEnhancer,
-} from 'calypso/state/data-layer/http-data';
-import wpcomApiMiddleware from 'calypso/state/data-layer/wpcom-api-middleware';
 import happychatMiddleware from 'calypso/state/happychat/middleware';
 import { requestHappychatEligibility } from 'calypso/state/happychat/user/actions';
 import { setStore } from 'calypso/state/redux-store';
@@ -32,7 +26,6 @@ import 'calypso/assets/stylesheets/style.scss';
 
 async function AppBoot() {
 	const rootReducer = combineReducers( {
-		httpData,
 		currentUser,
 		sites,
 	} );
@@ -42,13 +35,7 @@ async function AppBoot() {
 		compose(
 			consoleDispatcher,
 			addReducerEnhancer,
-			httpDataEnhancer,
-			applyMiddleware(
-				thunkMiddleware,
-				wpcomApiMiddleware,
-				analyticsMiddleware,
-				happychatMiddleware
-			)
+			applyMiddleware( thunkMiddleware, analyticsMiddleware, happychatMiddleware )
 		)
 	);
 

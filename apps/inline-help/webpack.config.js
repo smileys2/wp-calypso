@@ -72,6 +72,7 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin( {
 			global: 'window',
+			'process.env.NODE_DEBUG': JSON.stringify( process.env.NODE_DEBUG || false ),
 		} ),
 		...SassConfig.plugins( {
 			filename: 'build.min.css',
