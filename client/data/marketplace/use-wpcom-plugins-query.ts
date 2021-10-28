@@ -29,7 +29,7 @@ export function fetchWPCOMPlugins( type: Type ) {
 
 	// return wpcom.req.get(
 	// 	{
-	// 		path: `marketplace/plugins`,
+	// 		path: `marketplace/products`,
 	// 		apiNamespace: 'wpcom/v2',
 	// 	},
 	// 	query
