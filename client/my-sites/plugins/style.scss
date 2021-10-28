@@ -63,17 +63,11 @@
 
 .plugins__main-buttons {
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	align-items: stretch;
-	margin: auto;
+	align-items: center;
 	margin-right: 15px;
 
 	@include breakpoint-deprecated( '>480px' ) {
-		flex-direction: row;
-		align-items: flex-end;
 		margin-right: 0;
-		margin-bottom: 17px;
 	}
 
 	.plugins__button {
@@ -83,7 +77,6 @@
 			margin-bottom: 8px;
 
 			@include breakpoint-deprecated( '>480px' ) {
-				margin-bottom: 0;
 				margin-right: 10px;
 			}
 		}
