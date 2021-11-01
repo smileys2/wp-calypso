@@ -1623,8 +1623,13 @@ Undocumented.prototype.initiateTransfer = function ( siteId, plugin, theme, onPr
 		};
 
 		if ( plugin ) {
-			post.body = { plugin };
+			if ( Array.isArray( plugin ) ) {
+				post.body = { plugins: plugin };
+			} else {
+				post.body = { plugin };
+			}
 		}
+
 		if ( theme ) {
 			post.formData = [ [ 'theme', theme ] ];
 		}
