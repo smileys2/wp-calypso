@@ -17,8 +17,7 @@ import 'calypso/state/themes/init';
  *
  * @param {number} siteId -- the site to transfer
  * @param {window.File} file -- theme zip to upload
- * @param {string} plugin -- plugin slug
- *
+ * @param {string | []string]} plugin -- plugin slug
  * @returns {Promise} for testing purposes only
  */
 export function initiateThemeTransfer( siteId, file, plugin ) {
@@ -124,7 +123,6 @@ function transferInitiateFailure( siteId, error, plugin, context ) {
  * @param {string} context -- from which the transfer was initiated
  * @param {number} [interval] -- time between poll attempts
  * @param {number} [timeout] -- time to wait for 'complete' status before bailing
- *
  * @returns {Promise} for testing purposes only
  */
 export function pollThemeTransferStatus(
